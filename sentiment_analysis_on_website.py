@@ -1,6 +1,6 @@
 """
-This python file is a combination of main.py and urls_from_website.py.
-This file was created as an attempt for chrome extension
+This Python Script takes as input a website name from InitialURL.txt and analyses all the articles in that website about the current ruling part of India.
+This script is a data-driven approach to analyse the bias of a website towards the ruling party thereby creating a base to understand the credibility of the same
 """
 from bs4 import BeautifulSoup
 import requests
@@ -8,6 +8,9 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from urllib.parse import urlparse
 import matplotlib.pyplot as plt
 
+"""
+This scraps all the webpages from a specific website
+"""
 def scrap_urls(main_url, domain_name):
     response = requests.get(main_url)
     html = response.text
@@ -21,7 +24,6 @@ def scrap_urls(main_url, domain_name):
             urls_to_be_added.append(href)
     # print(urls_to_be_added)
     return urls_to_be_added
-
 
 def run_initial_url():
     f = open("InitialURL.txt", "r")
@@ -52,7 +54,6 @@ def run_initial_url():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     url_list = run_initial_url()
-    # we are using request package to make a GET request for the website, which means we're getting data from it.
 
     topics = [' modi ', 'bjp', ' lotus ', ' politics ', 'namo', ' narendra modi', ' saffron ', ' right wing ', 'nda']
     sentiment = SentimentIntensityAnalyzer()
